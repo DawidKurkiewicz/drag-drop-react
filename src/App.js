@@ -1,28 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-class App extends Component {
+export default class App extends Component {
+    state = {
+      items: [{name:"item1",
+               category:"uncomplete",
+               bgcolor: "red"},
+
+              {name:"item2",
+               category:"complete",
+               bgcolor:"green"},
+
+              {name:"item3",
+               category:"complete",
+               bgcolor:"blue"}
+        ]}
   render() {
+    const items = {
+      uncomplete: [],
+      complete: []
+    }
+    this.state.items.forEach((i) => {
+      items[i.category].push(
+      <div key = {i.name}
+        onDragStart ={(e) => this.onDragStart(e, i.name)}
+    draggable
+    className = 'draggable'
+    style={{backgroundColor: i.bgcolor}}>{i.name}
+    </div>)
+  })
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="container">
+
       </div>
     );
   }
 }
-
-export default App;
